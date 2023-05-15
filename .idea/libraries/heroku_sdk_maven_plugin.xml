@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="heroku.sdk.maven.plugin" type="repository">
+    <properties include-transitive-deps="false" maven-id="com.heroku.sdk:heroku-maven-plugin:3.0.7" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/heroku-maven-plugin-3.0.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
