@@ -17,7 +17,7 @@
     <meta name="author" content="" />
     <title>挑個牌子</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <!-- Bootstrap icons-->

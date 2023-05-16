@@ -16,7 +16,7 @@
     <meta name="author" content="" />
 
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <!-- Bootstrap icons-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Bootstrap icons-->
