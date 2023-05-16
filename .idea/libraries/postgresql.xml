@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="postgresql" type="repository">
-    <properties include-transitive-deps="false" maven-id="org.postgresql:postgresql:42.0.0" />
+    <properties include-transitive-deps="false" maven-id="org.postgresql:postgresql:42.6.0" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/postgresql-42.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/postgresql-42.6.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

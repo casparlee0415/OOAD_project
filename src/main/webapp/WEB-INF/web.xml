@@ -53,4 +53,5 @@
         <url-pattern>*.ttf</url-pattern>
         <url-pattern>*.svg</url-pattern>
     </servlet-mapping>
+
 </web-app>

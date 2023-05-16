@@ -1,6 +1,6 @@
 target/*
 !target/OOAD_project-1.0-SNAPSHOT.war
-apache-tomee-plume-9.0.0/
+apache-tomcat-10.1.8/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
