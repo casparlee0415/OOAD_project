@@ -1,11 +1,13 @@
 package com.DBConnection;
 
+import java.io.File;
 import java.sql.*;
 import java.util.Properties;
 
 public class DBConnection {
-    private final String url = "jdbc:sqlite:DB/scooter.DB";
 
+    private final String root=getParent(System.getProperty("catalina.home"));
+    private final String url = "jdbc:sqlite:"+root+"DB/scooter.DB";
 
     public Connection getConnection(){
         Connection conn=null;
@@ -21,5 +23,16 @@ public class DBConnection {
             ex.printStackTrace();
         }
         return conn;
+    }
+
+    private static String getParent(String url){
+        if(url==null) return "";
+        url=url.replace('\\','/');
+
+        int endIndex=url.lastIndexOf('/')+1;
+        url=url.substring(0,endIndex);
+
+
+        return url;
     }
 }

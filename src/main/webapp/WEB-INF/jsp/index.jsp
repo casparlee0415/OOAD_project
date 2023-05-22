@@ -1,6 +1,5 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.Entity.Brand" %>
-<%@ page import="com.DBConnection.DBConnection" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -109,7 +108,7 @@
           <div class="col mb-5">
             <div class="card h-100">
               <!-- Product image-->
-              <img class="card-img-top" src="/img/brand/${brand.name}.jpeg" alt="..."/>
+              <img class="card-img-top" src="data:image/jpeg;base64, ${brandImgMap.get(brand.id)}" alt="..."/>
               <!-- Product details-->
               <div class="card-body p-4">
                 <div class="text-center">

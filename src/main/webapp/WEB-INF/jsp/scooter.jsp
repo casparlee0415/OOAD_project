@@ -1,6 +1,5 @@
 <%@ page import="java.util.*" %>
-<%@ page import="com.Entity.Brand" %>
-<%@ page import="com.DBConnection.DBConnection" %>
+<%@ page import="com.Entity.Scooter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -37,7 +36,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="./index">Home</a></li>
                         <li class="nav-item">
                             <form action="./brand" method="get">
                                 <input type="hidden" id='${brand.id}' name="brandId" value="${brand.id}">
@@ -54,7 +53,7 @@
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
             <div class="row gx-4 gx-lg-5 align-items-center my-5">
-                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="/img/scooter/${scooter.name}.jpeg" alt="..." /></div>
+                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="data:image/jpeg;base64, ${scooterImgMap.get(scooter.id)}" alt="..." /></div>
                 <div class="col-lg-5">
                     <h1 class="font-weight-light">${scooter.name}</h1>
                     <p><br>車型：${scooter.type}</p>
@@ -75,7 +74,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <h2 class="card-title">${item.name}</h2>
-                                    <img src="/img/scooter/${item.name}.jpeg" width="250px" alt="">
+                                    <img src="data:image/jpeg;base64, ${scooterImgMap.get(item.id)}" width="250px" alt="">
                                     <p></p>
                                     <p></p>
                                     <h5 class="fw-bolder">${item.price}萬</h5>

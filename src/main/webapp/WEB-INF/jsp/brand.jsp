@@ -1,6 +1,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.Entity.Brand" %>
-<%@ page import="com.DBConnection.DBConnection" %>
+<%@ page import="com.Entity.Scooter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -107,7 +107,7 @@
                     <br>
                     <img
                         class="card-img-top"
-                        src="/img/scooter/${scooter.name}.jpeg"
+                        src="data:image/jpeg;base64, ${scooterImgMap.get(scooter.id)}"
                         alt="..."
                     />
                     <!-- Product details-->
@@ -118,7 +118,7 @@
                         <!-- Product price-->
                         <p></P>
                         <p></P>
-                        <p>${scooter.price}萬</P>
+                        <p>${scooter.price}萬</p>
                         </div>
                     </div>
                     <!-- Product actions-->
