@@ -19,6 +19,7 @@ public class BrandServletTest {
     @Before
     public void setUp() throws Exception {
         servlet=new BrandServlet();
+        servlet.init(new MockServletConfig());
     }
 
     @After

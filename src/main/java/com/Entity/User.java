@@ -1,9 +1,9 @@
 package com.Entity;
 
 public class User {
-    private String id;
-    private String name;
-    private String imgUrl;
+    private String id="";
+    private String name="";
+    private String imgUrl="";
 
     public void setId(String id){
         this.id=id;

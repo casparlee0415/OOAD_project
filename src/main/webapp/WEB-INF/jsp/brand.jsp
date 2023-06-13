@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <!-- Core theme CSS (includes Bootstrap)-->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="/js/login.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -76,6 +77,28 @@
                   <li class="nav-item"><a class="nav-link" href="#!">Services</a></li> -->
               </ul>
           </div>
+          <input type="hidden" id="targetUrl" value="/brand?brandId=${brand.id}">
+          <% if(session.getAttribute("user")==null){ %>
+          <script src="https://accounts.google.com/gsi/client" async defer></script>
+          <div id="g_id_onload" data-client_id="1068544910867-saj93p4veeu4piudfb382ka7qatb8jsu.apps.googleusercontent.com"
+               data-callback="onSignIn1"></div>
+          <div class="g_id_signin"  theme="dark" width="240" height="50" longtitle="true"></div>
+          <span id="GOOGLE_STATUS_1"></span>
+          <script src="/js/login.js"></script>
+          <% }else{ %>
+          <div>
+              <img style="width: 40px; height: 40px; border-radius: 100%; border: none" src="${sessionScope.user.imgUrl}">
+          </div>
+          <div class="fw-bolder" style="height:0px;line-height:0px;">
+              <p style="color:white">&nbsp${sessionScope.user.name}&nbsp</p>
+          </div>
+          <div>
+              <form action="./logout" method="post">
+                  <input type="hidden" name="targetUrl" value="/brand?brandId=${brand.id}">
+                  <button type="submit" id="GOOGLE_logout" class="btn btn-large btn-warning">登出</button>
+              </form>
+          </div>
+          <% } %>
       </div>
     </nav>
     <header class="bg-dark py-5">

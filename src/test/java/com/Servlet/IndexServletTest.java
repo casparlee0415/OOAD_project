@@ -17,6 +17,7 @@ public class IndexServletTest {
     @Before
     public void setUp() throws Exception {
         servlet=new IndexServlet();
+        servlet.init(new MockServletConfig());
     }
 
     @After

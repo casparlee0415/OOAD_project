@@ -10,6 +10,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.mock.web.MockServletConfig;
+
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -19,6 +21,7 @@ public class ScooterServletTest {
     @Before
     public void setUp() throws Exception {
         servlet=new ScooterServlet();
+        servlet.init(new MockServletConfig());
     }
 
     @After

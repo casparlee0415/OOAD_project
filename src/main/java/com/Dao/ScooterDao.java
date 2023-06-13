@@ -10,20 +10,20 @@ import java.util.*;
 public class ScooterDao {
     private final DBConnection dbConnection = new DBConnection();
     private static final String SELECT_SCOOTER_BY_BRAND_ID = "SELECT s.scooter_id, s.scooter_name, s.price, b.brand_id, b.brand_name FROM \"scooter\" As s " +
-                                                            "INNER JOIN \"brand\" As b ON s.brand_id=b.brand_id " +
-                                                            "where b.brand_id = ? ORDER BY s.scooter_name";
+            "INNER JOIN \"brand\" As b ON s.brand_id=b.brand_id " +
+            "where b.brand_id = ? ORDER BY s.scooter_name";
 
     private static final String ALL_SCOOTER_ATTRIBUTE = "s.scooter_id, s.scooter_name, s.scooter_type, s.price, s.engine_type, " +
-                                                        "s.transmission, s.displacement, s.performance ";
+            "s.transmission, s.displacement, s.performance ";
     private static final String SELECT_SCOOTER_BY_SCOOTER_ID = "SELECT " + ALL_SCOOTER_ATTRIBUTE + ",b.brand_id, b.brand_name FROM \"scooter\" As s "+
-                                                            "INNER JOIN \"brand\" As b ON s.brand_id=b.brand_id " +
-                                                            "where s.scooter_id = ?";
+            "INNER JOIN \"brand\" As b ON s.brand_id=b.brand_id " +
+            "where s.scooter_id = ?";
 
     private static final String SELECT_SCOOTER_BY_BRAND_ID_WHERE_NOT_EQUAL_SCOOTER_ID = "SELECT s.scooter_id, s.scooter_name, s.price, b.brand_id, b.brand_name " +
-                                                            "FROM \"scooter\" As s " +
-                                                            "INNER JOIN \"brand\" As b ON s.brand_id=b.brand_id " +
-                                                            "where b.brand_id = ? AND s.scooter_id <> ? ORDER BY s.price ASC " +
-                                                            "LIMIT 3";
+            "FROM \"scooter\" As s " +
+            "INNER JOIN \"brand\" As b ON s.brand_id=b.brand_id " +
+            "where b.brand_id = ? AND s.scooter_id <> ? ORDER BY s.price ASC " +
+            "LIMIT 3";
     public List<Scooter> selectScooterByBrandId(int brandId){
         Connection connection = dbConnection.getConnection();
         ResultSet resultSet;
