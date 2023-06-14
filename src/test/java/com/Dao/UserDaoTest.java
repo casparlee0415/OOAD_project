@@ -19,13 +19,14 @@ public class UserDaoTest {
 
     @After
     public void tearDown() throws Exception {
-        userDao.deleteUser("test");
+        User user=userDao.selectUserByUserId("test");
+        if(!user.getId().equals("test")) userDao.deleteUser("test");
     }
 
     @Test
     public void selectUserByUserId() {
         User user=userDao.selectUserByUserId("test");
-        assertEquals("user",user.getId());
+        assertEquals("test",user.getId());
     }
 
     @Test

@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import com.Entity.*;
+
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.*;
 import static org.junit.Assert.*;
@@ -14,8 +16,9 @@ public class CommentDaoTest {
     protected final CommentDao commentDao=new CommentDao();
     @Before
     public void setUp() throws Exception {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         if(!userDao.selectUserByUserId("test").getId().equals("test")) userDao.insertUser("test","test","");
-        commentDao.insertComment(1,"234","1234",14,"test");
+        commentDao.insertComment(1,"234",formatter.format(new Date()),14,"test");
     }
 
     @After
@@ -35,7 +38,8 @@ public class CommentDaoTest {
 
     @Test
     public void insertComment() {
-        commentDao.insertComment(1,"2345","1234",14,"test");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        commentDao.insertComment(1,"2345",formatter.format(new Date()),14,"test");
         List<Comment> commentList=commentDao.selectCommentByScooterId(14).stream()
                 .filter(i->i.getUser().getId().equals("test")).collect(Collectors.toList());
         assertTrue(commentList.stream().filter(i->i.getDescription().equals("2345")).count()>0);

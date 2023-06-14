@@ -75,7 +75,7 @@ public class UserDao {
         Connection connection = dbConnection.getConnection();
 
         if(connection!=null) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
                 preparedStatement.setString(1,id);
                 preparedStatement.executeUpdate();
                 connection.close();
