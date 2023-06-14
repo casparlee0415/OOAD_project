@@ -1,5 +1,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.Entity.Scooter" %>
+<%@ page import="com.Entity.Comment" %>
+<%@ page import="com.Entity.User" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -17,6 +20,7 @@
         <!-- Bootstrap icons-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="/js/login.js"></script>
@@ -85,6 +89,7 @@
                 </div>
             </div>
             <!-- Call to Action-->
+
             <div class="card text-white bg-secondary my-5 py-4 text-center">
                 <div class="card-body"><p class="text-white m-0">${scooter.engine}<br>${scooter.transmission}<br>性能：${scooter.performance}</p></div>
             </div>
@@ -112,6 +117,170 @@
                         </div>
                     </div>
                 </c:forEach>
+            </div>
+            <div class="col">
+                <%double num= Double.valueOf(request.getAttribute("averageScore").toString());%>
+                <%if(num>=1){%>
+                <div class="card text-black bg-white my-5 py-4 text-center">
+                    <h2 class="card-title text-black">Rate</h2>
+                    <div class="card-body">
+                        <div class="row gx-4 gx-lg-5 align-items-center my-5">
+
+                            <div style="display: flex;justify-content: center;align-items: center;">
+                                <h2><%=num%>&nbsp</h2>
+                                <%double N=Double.valueOf((int)num);%>
+                                <%for(int i=1;i<=N;i++){%>
+                                    <span class="fa fa-star" style="color: orange"></span>
+                                <%}%>
+                                <%if(num-N>=0.25&&num-N<0.75){%>
+                                    <span class="fa fa-star-half" style="color: orange"></span>
+                                <%}else if(num-N>=0.75&&num-N<1){%>
+                                    <span class="fa fa-star" style="color: orange"></span>
+                                <%}%>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+                <div class="card text-black bg-white my-5 py-4 text-center" id="commentArea">
+                    <h2 class="card-title text-black" id="comment_title">Comment</h2>
+                    <div class="card-body" >
+
+                        <div>
+                            <div>
+                                <%if(session.getAttribute("user")!=null){%>
+                                    <div style="display: flex;justify-content: center;align-items: center">
+                                        <div style="display:flex; position: relative;top: 0%;  left: 0%; transform: translate(-100%, 0%);">
+                                            <div>
+                                                <img style="width: 40px; height: 40px; border-radius: 100%; border: none" src="${sessionScope.user.imgUrl}">
+                                            </div>
+                                            <div class="fw-bolder" style="height:40px;line-height:40px;">
+                                                <p style="color:black">&nbsp${sessionScope.user.name}&nbsp</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <form action="./addComment" method="post" id="addCommentForm">
+
+                                        <div style="display:flex; position: relative;top: 0%;  left: 34%; transform: translate(0%, 0%);">
+                                            <div style="display: flex;justify-content: center;align-items: center">
+                                                <p style="height:20%">Rating&nbsp</p>
+                                                <select name="score" style="width: 50px;height:40px;line-height: 40px">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3" selected="selected">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div style="display: flex;justify-content: center;align-items: center">
+                                            <textarea id="user_comment" rows="5" cols="45" name="discription" ></textarea>
+                                        </div>
+                                        <input type="hidden" name="scooterId" value="${scooter.id}">
+                                        <br>
+                                        <div style="display: flex;justify-content: center;align-items: center">
+                                            <button class="btn btn-primary" type="submit">Confirm</button>
+                                        </div>
+                                    </form>
+                                <%}%>
+                            </div>
+                        </div>
+                        <br>
+                        <%List<Comment> commentList= (List<Comment>)request.getAttribute("commentList"); %>
+                        <%for(int i=0;i<commentList.size();i++){%>
+                            <div class="card text-black bg-white my-5 py-4 text-center" id="comment<%=i%>">
+                                <div style="display: flex;justify-content: center;align-items: center">
+                                    <%User commentUser=commentList.get(i).getUser();%>
+                                    <div style="display:flex; position: relative;top: 0%;  left: 0%; transform: translate(-100%, 0%);">
+                                        <div>
+                                            <img style="width: 40px; height: 40px; border-radius: 100%; border: none" src="<%=commentUser.getImgUrl()%>">
+                                        </div>
+                                        <div class="fw-bolder" style="height:40px;line-height:40px;">
+                                            <p style="color:black">&nbsp<%=commentUser.getName()%>&nbsp</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div style="display: flex;justify-content: left;align-items: center">
+                                    <div style="display: flex;position: relative;top: 0%;  left: 34%; transform: translate(0%, 0%);">
+                                            <h2><%=(float)commentList.get(i).getScore()%>&nbsp</h2>
+                                            <%int N=commentList.get(i).getScore();%>
+                                            <div style="height:40px;line-height:40px;">
+                                                <%for(int j=1;j<=N;j++){%>
+                                                    <span class="fa fa-star" style="color: orange"></span>
+                                                <%}%>
+                                            </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div style="display: flex;justify-content: left;align-items: center">
+                                    <div style="display: flex;position: relative;top: 0%;  left: 34%; transform: translate(0%, 0%);">
+                                        <%SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");%>
+                                        <p><%=formatter.format(commentList.get(i).getTimestamp())%></p>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="display: flex;justify-content: center;align-items: center">
+                                    <div style="display:flex;width: 400px;height: 150px;border: 1px solid #ccc;">
+                                        <p id="discriptionContent"><%=commentList.get(i).getDescription()%></p>
+                                    </div>
+                                </div>
+                                <%if(session.getAttribute("user")!=null){%>
+                                    <%if(commentUser.getId().equals(((User)session.getAttribute("user")).getId())){%>
+                                        <div style="display: flex;justify-content: center;align-items: center">
+                                            <button class="btn btn-primary" onclick="editClick('<%=commentList.get(i).getDescription()%>')">EDIT</button>&nbsp&nbsp&nbsp&nbsp
+                                            <script type="text/javascript">
+                                                function editClick(str){
+                                                    let textarea=document.getElementById("editDisciption");
+                                                    textarea.innerHTML=str;
+                                                    document.getElementById("editDialog").showModal();
+                                                }
+
+                                            </script>
+                                            <form action="./deleteComment" method="post">
+                                                <input type="hidden" name="commentNum" value="comment<%=i%>">
+                                                <input type="hidden" name="commentId" value="<%=commentList.get(i).getId()%>">
+                                                <input type="hidden" name="scooterId" value="${scooter.id}">
+                                                <button class="btn btn-secondary" type="submit">DELETE</button>
+                                            </form>
+                                        </div>
+                                        <dialog id="editDialog">
+                                            <form action="./editComment" method="post">
+                                                <div>
+                                                    <p>Rating&nbsp</p>
+                                                    <select name="score" style="width: 50px">
+                                                        <%for(int j=1;j<=5;j++){%>
+                                                            <%if(j==commentList.get(i).getScore()){%>
+                                                                <option value="<%=j%>" selected="selected"><%=j%></option>
+                                                            <%}else{%>
+                                                                <option value="<%=j%>"><%=j%></option>
+                                                            <%}%>
+                                                        <%}%>
+                                                    </select>
+                                                </div>
+                                                <br>
+                                                <div>
+                                                    <p>Discription</p>
+                                                    <textarea id="editDisciption" name="discription"></textarea>
+                                                    <input type="hidden" name="commentNum" value="comment<%=i%>">
+                                                    <input type="hidden" name="commentId" value="<%=commentList.get(i).getId()%>">
+                                                    <input type="hidden" name="scooterId" value="${scooter.id}">
+                                                    <div style="display: flex;justify-content: center;align-items: center">
+                                                        <button type="submit" class="btn btn-primary">Confirm</button>&nbsp
+                                                        <button type="reset" class="btn btn-secondary" onclick="document.getElementById('editDialog').close()">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </dialog>
+                                    <%}%>
+                                <%}%>
+                            </div>
+                            <br>
+                        <%}%>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Footer-->

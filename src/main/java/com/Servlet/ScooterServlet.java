@@ -1,5 +1,6 @@
 package com.Servlet;
 
+import com.Service.CommentService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
@@ -18,12 +19,19 @@ public class ScooterServlet extends HttpServlet{
     private static final String SCOOTER_PAGE_URL = "WEB-INF/jsp/scooter.jsp";
 
     private final ScooterService scooterService=new ScooterService();
+    private final CommentService commentService=new CommentService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String webapp=getServletContext().getRealPath("/").replace('\\','/');
         int scooterId=Integer.parseInt(req.getParameter("scooterId").toString());
         Scooter scooter=scooterService.selectScooterByScooterId(scooterId);
         Brand brand= scooter.getBrand();
+        List<Comment> commentList=commentService.selectCommentByScooterId(scooterId);
+        Collections.reverse(commentList);
+        double averageScore=0;
+        if(!commentList.isEmpty())
+            averageScore=commentService.getAverageScore(scooterId);
+
         List<Scooter> otherScooterList = scooterService
                 .selectScooterByBrandIdWhereNotEqualScooterId(brand.getId(),scooterId);
         Map<Integer,String> imageMap=new HashMap<>();
@@ -40,6 +48,8 @@ public class ScooterServlet extends HttpServlet{
         req.setAttribute("otherScooterList", otherScooterList);
         req.setAttribute("brand",brand);
         req.setAttribute("scooterImgMap",imageMap);
+        req.setAttribute("commentList",commentList);
+        req.setAttribute("averageScore",averageScore);
         req.getRequestDispatcher(SCOOTER_PAGE_URL).forward(req, resp);
     }
 

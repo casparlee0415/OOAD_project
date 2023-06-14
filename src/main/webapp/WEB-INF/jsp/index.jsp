@@ -139,7 +139,6 @@
                 <div class="text-center">
                   <form action='./brand' method="get">
                     <input type='hidden' id='brandId' name='brandId' value='${brand.id}'>
-                    <input type='hidden' id='brandName' name='brandName' value='${brand.name}'>
                     <a class="btn btn-outline-dark mt-auto" href="javascript:void(0)" onclick="parentNode.submit()"
                         >進入品牌</a
                     >
