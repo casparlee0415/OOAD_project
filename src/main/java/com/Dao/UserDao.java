@@ -15,6 +15,7 @@ public class UserDao {
     private static final String UPDATE_USER_BY_USER_ID="UPDATE \"user\" SET user_name=?, img_url=? where user_id = ?";
     private static final String INSERT_USER="INSERT INTO \"user\" (user_id, user_name, img_url) VALUES (?, ?, ?)";
 
+    private static final String DELETE_USER="DELETE FROM \"user\" where user_id=?";
     public User selectUserByUserId(String id){
         Connection connection = dbConnection.getConnection();
         ResultSet resultSet;
@@ -62,6 +63,20 @@ public class UserDao {
                 preparedStatement.setString(1,id);
                 preparedStatement.setString(2,name);
                 preparedStatement.setString(3,imgUrl);
+                preparedStatement.executeUpdate();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteUser(String id){
+        Connection connection = dbConnection.getConnection();
+
+        if(connection!=null) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER)) {
+                preparedStatement.setString(1,id);
                 preparedStatement.executeUpdate();
                 connection.close();
             } catch (SQLException e) {
