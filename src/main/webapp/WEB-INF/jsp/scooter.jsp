@@ -223,8 +223,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body" style="display: flex;justify-content: center;align-items: center">
-                                    <div style="display:flex;width: 400px;height: 150px;border: 1px solid #ccc;">
-                                        <p id="discriptionContent"><%=commentList.get(i).getDescription()%></p>
+                                    <div id="discriptionContent" style="display:flex;width: 400px;height: 150px;border: 1px solid #ccc;overflow: scroll">
+                                        <p style="text-align: left"><%=commentList.get(i).getDescription()%></p>
                                     </div>
                                 </div>
                                 <%if(session.getAttribute("user")!=null){%>

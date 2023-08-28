@@ -21,7 +21,7 @@ public class AddCommentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         int score=Integer.valueOf(req.getParameter("score").toString());
         String discription=req.getParameter("discription").toString();
         String timestamp=formatter.format(new Date());

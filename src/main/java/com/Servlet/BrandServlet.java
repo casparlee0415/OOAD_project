@@ -10,6 +10,7 @@ import com.Entity.*;
 import com.Service.BrandService;
 import com.Service.ScooterService;
 import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Controller;
 
 public class BrandServlet extends HttpServlet{
     private static final String BRAND_PAGE_URL = "WEB-INF/jsp/brand.jsp";
